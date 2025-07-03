@@ -21,7 +21,7 @@ Then('I should be redirected to the dashboard', async () => {
 })
 
 Then('I should see an error message saying "The username and password could not be verified', async () => {
-    let errorMessage = await $('p*=The username and password could not be verified');
+    let errorMessage = LoginPage.pAuthenticationError;
     await expect(errorMessage).toBeDisplayed();
 })
 
