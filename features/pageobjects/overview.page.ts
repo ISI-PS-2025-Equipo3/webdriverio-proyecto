@@ -4,6 +4,9 @@ class OverviewPage extends Page {
   get btnTransfer() {
     return $('//a[normalize-space()="Transfer Funds"]');
   }
+  public get btnPayment(){
+    return $('//a[normalize-space()="Bill Pay"]')
+  }
 
   get btnRequestLoan() {
     return $('//a[normalize-space()="Request Loan"]');
@@ -29,10 +32,18 @@ class OverviewPage extends Page {
     await button.click();
   }
 
+
   public async navigateToLoan() {
     const btnRequestLoan = this.btnRequestLoan;
     await this.btnRequestLoan.waitForClickable({ timeout: 5000 });
     await btnRequestLoan.click();
+     }
+
+  public async navigateToBillPay(){
+    const button = this.btnPayment;
+    await button.waitForClickable({ timeout: 5000 });
+    await button.click();
+
   }
 }
 
