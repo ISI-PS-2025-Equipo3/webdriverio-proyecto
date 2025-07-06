@@ -2,7 +2,7 @@ import Page from "./page.js";
 
 class TransferPage extends Page {
   get inputAmount() {
-    return $('//input[@id="amount"]');
+    return $('input[@id="amount"]');
   }
 
   get dropdownOriginAccount() {
@@ -14,7 +14,7 @@ class TransferPage extends Page {
   }
 
   get btnSubmit() {
-    return $('//input[@type="submit" and @value="Transfer"]');
+    return $('input[@type="submit" and @value="Transfer"]');
   }
 
   get transferResultContainer() {
