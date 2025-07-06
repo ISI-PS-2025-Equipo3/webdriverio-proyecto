@@ -41,10 +41,16 @@ class TransferPage extends Page {
     await browser.pause(5000);
   }
 
-  async validateTransaction() {
+  async validateSuccefulTransaction() {
     await this.transferResultContainer.waitForDisplayed({ timeout: 5000 });
     const text = await this.transferResultContainer.getText();
-    return text.includes("hfasdfasdfas been transferred from account");
+    return text.includes("been transferred from account");
+  }
+
+  async validateNotTransaction() {
+    await this.transferResultContainer.waitForDisplayed({ timeout: 5000 });
+    const text = await this.transferResultContainer.getText();
+    expect(text).toContain("There are not enough funds in the account");
   }
 
   open() {

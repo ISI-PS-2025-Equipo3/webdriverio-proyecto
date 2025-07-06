@@ -20,9 +20,7 @@ class LoginPage extends Page {
     return $('input[value="Log In"]');
   }
 
-  public get pAuthenticationError() {
-    return $("p*=The username and password could not be verified");
-  }
+
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
