@@ -28,21 +28,19 @@ export const config: WebdriverIO.Config = {
     // 'path/to/excluded/files'
   ],
 
-  capabilities: [
-    {
-      maxInstances: 1,
-      browserName: "chrome",
-      "goog:chromeOptions": {
-        args: [
-          "--headless",
-          "--disable-gpu",
-          "--no-sandbox",
-          "--disable-dev-shm-usage",
-          "--user-data-dir=/tmp/chrome-profile",
-        ],
-      },
-    },
-  ],
+capabilities: [
+  {
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+      args: [
+        '--headless=new', // opcional: útil en CI
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        `--user-data-dir=/tmp/temporary-profile-${Date.now()}` // ruta única para evitar colisiones
+      ]
+    }
+  }
+]
   //
   // ============
   // Capabilities
