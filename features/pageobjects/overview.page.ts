@@ -5,6 +5,10 @@ class OverviewPage extends Page {
     return $('//a[normalize-space()="Transfer Funds"]');
   }
 
+  get btnRequestLoan() {
+    return $('//a[normalize-space()="Request Loan"]');
+  }
+
   public get accountsTable() {
     return $('table[id="accountTable"]');
   }
@@ -23,6 +27,12 @@ class OverviewPage extends Page {
     const button = this.btnTransfer;
     await button.waitForClickable({ timeout: 5000 });
     await button.click();
+  }
+
+  public async navigateToLoan() {
+    const btnRequestLoan = this.btnRequestLoan;
+    await this.btnRequestLoan.waitForClickable({ timeout: 5000 });
+    await btnRequestLoan.click();
   }
 }
 

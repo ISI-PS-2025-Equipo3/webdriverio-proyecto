@@ -2,17 +2,20 @@ Feature: transfer between accounts in parabank
 
   Scenario: transferencia exitosa
     Given I am logged in trans
-    When I introduce valid values on origin account, destination account and amount
-   # And amount value is equals o less than available credit
+    When I introduce valid values "<origin>" as origin, "<destination>" as destination and "<amount>" as amount
     Then should be displayed a messaje with the success info
-  
-  # Scenario: transferencia rechazada por monto superior a credito disponible
-  #   Given I am logged in
-  #   When I introduce valid values on origin account, destination account and amount
-  #   And  amount value is greater than available credit
-  #   Then should be displayed a messaje with the error 
-
 
     Examples:
-    | originAcount | destinationAcount|amount|
-    |12345         |12345             |123   |
+      | origin | destination | amount |
+      #|  13344 |       13345 |      1 |
+      |  13344 |       13346 |   1000 |
+
+  Scenario: Valor de la transferencia mayor a los fondos disponibles
+    Given I am logged in trans
+    When I introduce valid values "<origin>" as origin, "<destination>" as destination and "<amount>" as amount
+    Then should be displayed a messaje with the error info
+
+    Examples:
+      | origin | destination | amount |
+      #|  13344 |       13345 | 999999 |
+      |  13345 |       13346 | 500000 |

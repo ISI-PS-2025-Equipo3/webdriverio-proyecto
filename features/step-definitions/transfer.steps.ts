@@ -9,10 +9,10 @@ Given("I am logged in trans", async () => {
 });
 
 When(
-  "I introduce valid values on origin account, destination account and amount",
-  async () => {
+  "I introduce valid values {string} as origin, {string} as destination and {string} as amount",
+  async (origin: string, destination: string, amount: number) => {
     await overviewPage.navigateToTransfer();
-    await transferPage.setAmount(1);
+    await transferPage.setAmount(amount);
     await transferPage.setOriginAccount();
     await transferPage.setDestinationAccount();
     await transferPage.submitTranstacion();
@@ -20,34 +20,22 @@ When(
 );
 
 Then("should be displayed a messaje with the success info", async () => {
-  await transferPage.validateTransaction();
+  await transferPage.validateSuccefulTransaction();
 });
 
-// Then("I should see more details", async () => {
-//     let accountNumber = account_detailsPage.accountNumber
-//     let accountType = account_detailsPage.accountType
-//     let accountBalance = account_detailsPage.accountBalance
-//     let availableBalance = account_detailsPage.availableBalance
 
-//     await expect(accountNumber).toBeDisplayed();
-//     await expect(accountType).toBeDisplayed();
-//     await expect(accountBalance).toBeDisplayed();
-//     await expect(availableBalance).toBeDisplayed();
-// })
 
-// Then("I can see a list of accounts", async () => {
-//     let accountsTable = overviewPage.accountsTable
-//     await expect(accountsTable).toBeDisplayed();
-// });
+When(
+  "Amount value {string} is bigger than the available balance",
+  async (origin: string, destination: string, amount: number) => {
+    await overviewPage.navigateToTransfer();
+    await transferPage.setAmount(amount);
+    await transferPage.setOriginAccount();
+    await transferPage.setDestinationAccount();
+    await transferPage.submitTranstacion();
+  }
+);
 
-// Then("Each account shows its balance", async () => {
-//     let accountsRows = await overviewPage.accountsTableRows
-
-//     for (const row of accountsRows){
-//         const balanceCell = row.$('./td[2]');
-//         const text = (await balanceCell.getText()).trim();
-
-//         expect(text).not.toBe('');
-//     }
-
-// });
+Then("should be displayed a messaje with the error info", async () => {
+  await transferPage.validateNotTransaction();
+});
