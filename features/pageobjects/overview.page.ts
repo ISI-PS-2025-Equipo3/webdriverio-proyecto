@@ -4,6 +4,9 @@ class OverviewPage extends Page {
   get btnTransfer() {
     return $('//a[normalize-space()="Transfer Funds"]');
   }
+  public get btnPayment(){
+    return $('//a[normalize-space()="Bill Pay"]')
+  }
 
   public get accountsTable() {
     return $('table[id="accountTable"]');
@@ -21,6 +24,12 @@ class OverviewPage extends Page {
 
   public async navigateToTransfer() {
     const button = this.btnTransfer;
+    await button.waitForClickable({ timeout: 5000 });
+    await button.click();
+  }
+
+  public async navigateToBillPay(){
+    const button = this.btnPayment;
     await button.waitForClickable({ timeout: 5000 });
     await button.click();
   }
